@@ -7,7 +7,5 @@ COPY ["/dockerunittestspike.services/dockerunittestspike.services.csproj", "dock
 COPY ["/dockerunittestspike.unit.tests/dockerunittestspike.unit.tests.csproj", "dockerunittestspike.unit.tests/"]
 
 RUN dotnet restore "dockerunittestspike.unit.tests/dockerunittestspike.unit.tests.csproj"
-#RUN dotnet restore
 COPY . ./
 WORKDIR /src/dockerunittestspike.unit.tests/
-#ENTRYPOINT dotnet test --logger trx --results-directory /out/testresults
