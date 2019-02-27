@@ -1,0 +1,11 @@
+﻿version: '3.4'
+
+services: 
+ dockerunittests.unit.tests:
+  image: dockerunittestspike.unit.tests
+  build:
+    context: ../
+    dockerfile: dockerunittestspike.unit.tests/Dockerfile
+  entrypoint: dotnet test --logger trx --results-directory /out/testresults
+  volumes: 
+  - C:/Users/hario/source/repos/dockerunittestspike/testresults:/out/testresults

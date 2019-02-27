@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dokerunittestspike", "dokerunittestspike\dokerunittestspike.csproj", "{69C5C839-E8E1-4241-9588-5210C095FDEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dockerunittestspike.unit.tests", "dockerunittestspike.unit.tests\dockerunittestspike.unit.tests.csproj", "{FE126F3B-AD0B-4151-A2C0-D94B3CB97C3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dockerunittestspike.dto", "dockerunittestspike.dto\dockerunittestspike.dto.csproj", "{69E80463-A5ED-427E-ADF3-7FE8E4F8BCC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dockerunittestspike.domain", "dockerunittestspike.domain\dockerunittestspike.domain.csproj", "{DA80690C-1853-46B3-8146-77083335B609}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dockerunittestspike.services", "dockerunittestspike.services\dockerunittestspike.services.csproj", "{C18561EE-84E2-4B16-A6FB-9A67232A2020}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dockerunittestspike.dataaccess", "dockerunittestspike.dataaccess\dockerunittestspike.dataaccess.csproj", "{9788EE21-4855-40C9-9E86-E9CCC5782027}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69C5C839-E8E1-4241-9588-5210C095FDEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69C5C839-E8E1-4241-9588-5210C095FDEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69C5C839-E8E1-4241-9588-5210C095FDEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69C5C839-E8E1-4241-9588-5210C095FDEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE126F3B-AD0B-4151-A2C0-D94B3CB97C3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE126F3B-AD0B-4151-A2C0-D94B3CB97C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE126F3B-AD0B-4151-A2C0-D94B3CB97C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE126F3B-AD0B-4151-A2C0-D94B3CB97C3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69E80463-A5ED-427E-ADF3-7FE8E4F8BCC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69E80463-A5ED-427E-ADF3-7FE8E4F8BCC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69E80463-A5ED-427E-ADF3-7FE8E4F8BCC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69E80463-A5ED-427E-ADF3-7FE8E4F8BCC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA80690C-1853-46B3-8146-77083335B609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA80690C-1853-46B3-8146-77083335B609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA80690C-1853-46B3-8146-77083335B609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA80690C-1853-46B3-8146-77083335B609}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C18561EE-84E2-4B16-A6FB-9A67232A2020}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C18561EE-84E2-4B16-A6FB-9A67232A2020}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C18561EE-84E2-4B16-A6FB-9A67232A2020}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C18561EE-84E2-4B16-A6FB-9A67232A2020}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9788EE21-4855-40C9-9E86-E9CCC5782027}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9788EE21-4855-40C9-9E86-E9CCC5782027}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9788EE21-4855-40C9-9E86-E9CCC5782027}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9788EE21-4855-40C9-9E86-E9CCC5782027}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78F14FD9-DDE3-4912-B4CB-210DBDE8F35E}
+	EndGlobalSection
+EndGlobal

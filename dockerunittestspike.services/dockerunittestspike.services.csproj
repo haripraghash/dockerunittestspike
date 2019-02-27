@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\dockerunittestspike.dataaccess\dockerunittestspike.dataaccess.csproj" />
+    <ProjectReference Include="..\dockerunittestspike.domain\dockerunittestspike.domain.csproj" />
+    <ProjectReference Include="..\dockerunittestspike.dto\dockerunittestspike.dto.csproj" />
+  </ItemGroup>
+
+</Project>
