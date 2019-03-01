@@ -22,8 +22,9 @@ steps:
 
 - script: |
     export unittestslayerid=$(docker images --filter "label=unittestlayer=true" -q)
-    docker run --name unittestcontainer -d $unittestslayerid
-    docker cp unittestcontainer:/out/testesults ./testresults
+    env
+    docker create --name unittestcontainer $unittestslayerid
+    docker cp unittestcontainer:/out/testresults ./testresults
     docker stop unittestcontainer
     docker rm unittestcontainer
   displayName: Run unit tests
