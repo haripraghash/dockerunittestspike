@@ -1,0 +1,22 @@
+﻿version: '3.4'
+
+services: 
+ dokerunittestspike:
+  environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_HTTPS_PORT=44330
+  ports:
+    - "2086:80"
+    - "44331:443"
+  #image: dokerunittestspike_dockerunittestspike.unit.tests:latest
+  # build:
+  #   context: ../
+  #   dockerfile: dockerunittestspike.unit.tests/Dockerfile
+  #entrypoint: dotnet test --logger trx --results-directory /out/testresults
+  #entrypoint: /bin/sh -c ls
+  volumes: 
+  - C:\Users\hario\source\repos\dokerunittestspike\localtestresults:/out/testresults
+  - C:\Users\hario\source\repos\dokerunittestspike\publish:/app
+  - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+  - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro

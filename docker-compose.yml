@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  dokerunittestspike:
+    image: ${DOCKER_REGISTRY-}dokerunittestspike
+    build:
+      context: .
+      dockerfile: dokerunittestspike/Dockerfile
