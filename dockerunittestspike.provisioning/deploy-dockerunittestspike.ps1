@@ -6,7 +6,7 @@ Param (
 	[string]$DockerUserName,
 
 	[Parameter(Mandatory=$true)]
-	[string]$DockerPassword,
+	[securestring]$DockerPassword,
 
 	[Parameter(Mandatory=$true)]
 	[string]$DockerImageName,
