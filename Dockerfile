@@ -5,7 +5,7 @@ EXPOSE 443
 
 FROM microsoft/dotnet:2.2-sdk-alpine AS build
 WORKDIR /src
-#COPY ["dokerunittestspike.sln", "dokerunittestspike.sln"]
+
 COPY ["dockerunittestspike.dto/dockerunittestspike.dto.csproj", "dockerunittestspike.dto/"]
 COPY ["dockerunittestspike.domain/dockerunittestspike.domain.csproj", "dockerunittestspike.domain/"]
 COPY ["dockerunittestspike.dataaccess/dockerunittestspike.dataaccess.csproj", "dockerunittestspike.dataaccess/"]
@@ -23,7 +23,6 @@ RUN dotnet tool install dotnet-reportgenerator-globaltool --tool-path /dotnetglo
 LABEL unittestlayer=true
 RUN dotnet test --logger "trx;LogFileName=dockerunittestspiketestresults.xml" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=/out/testresults/coverage/ /p:Exclude="[xunit.*]*" --results-directory /out/testresults
 RUN /dotnetglobaltools/reportgenerator "-reports:/out/testresults/coverage/coverage.cobertura.xml" "-targetdir:/out/testresults/coverage/reports" "-reporttypes:HTMLInline;HTMLChart"
-RUN ls -la /out/testresults/coverage/reports
  
 FROM build AS publish
 RUN dotnet publish "dokerunittestspike.csproj" -c Release -o /app
