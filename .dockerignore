@@ -7,4 +7,4 @@
 */bin
 */obj
 **/.toolstarget
-*/dockerunittestspike.unit.tests
+*/dockerunittestspike.provisioning

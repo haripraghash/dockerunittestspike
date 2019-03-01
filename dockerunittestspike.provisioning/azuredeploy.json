@@ -1,0 +1,133 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "shortregion": {
+      "type": "string",
+      "defaultValue": "eun"
+    },
+    "environment": {
+      "type": "string",
+      "defaultValue": "dev"
+    },
+    "dockerImageName": {
+      "type": "string"
+    },
+    ///* Artifacts parameters */
+    //"_artifactsLocation": {
+    //  "type": "string"
+    //},
+    //"_artifactsLocationSasToken": {
+    //  "type": "securestring"
+    //},
+    //"_templateFolder": {
+    //  "type": "string",
+    //  "defaultValue": "Templates"
+    //},
+    //"_scriptsFolder": {
+    //  "type": "string",
+    //  "defaultValue": "Scripts"
+    //},
+    "dockerRegistryUrl": {
+      "type": "string"
+    },
+    "dockerUserName": {
+      "type": "string"
+    },
+    "dockerPassword": {
+      "type": "securestring"
+    }
+  },
+  "variables": {
+    "appServicePlanName": "[concat('dockerunittestspike', parameters('shortregion'), parameters('environment'), 'svcplan')]",
+    "webSiteName": "[concat('dockerunittestspike', parameters('shortregion'), parameters('environment'), 'webapp')]",
+    "appInsightsName": "[concat('dockerunittestspike', parameters('shortregion'), parameters('environment'), '-appinsights')]",
+    "location": [ "resourceGroup().location" ]
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "sku": {
+        "name": "S1",
+        "tier": "Standard",
+        "size": "S1",
+        "family": "S",
+        "capacity": 1
+      },
+      "kind": "linux",
+      "name": "[variables('appServicePlanName')]",
+      "apiVersion": "2016-09-01",
+      "location": "[variables('location')]",
+      "scale": null,
+      "properties": {
+        "name": "[variables('appServicePlanName')]",
+        "workerTierName": null,
+        "adminSiteName": null,
+        "hostingEnvironmentProfile": null,
+        "perSiteScaling": false,
+        "reserved": true,
+        "targetWorkerCount": 0,
+        "targetWorkerSizeId": 0
+      },
+      "dependsOn": []
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2016-08-01",
+      "name": "[variables('webSiteName')]",
+      "kind": "app,linux,container",
+      "location": "[variables('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
+      ],
+      "properties": {
+        "name": "[variables('webSiteName')]",
+        "siteConfig": {
+          "linuxFxVersion": "[concat('DOCKER|', parameters('dockerImageName'))]",
+          "alwaysOn": true,
+          "appSettings": [
+            {
+              "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+              "value": "false"
+            },
+            {
+              "name": "DOCKER_REGISTRY_SERVER_URL",
+              "value": "[parameters('dockerRegistryUrl')]"
+            },
+            {
+              "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+              "value": "[parameters('dockerUserName')]"
+            },
+            {
+              "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+              "value": "[parameters('dockerPassword')]"
+            }
+          ]
+        },
+        "identity": {
+          "type": "SystemAssigned"
+        },
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
+      }
+    },
+    {
+      "type": "microsoft.insights/components",
+      "kind": "web",
+      "name": "dockerunittestspike",
+      "apiVersion": "2014-04-01",
+      "location": "[variables('location')]",
+      "tags": {},
+      "properties": {
+        "ApplicationId": "dockerunittestspike"
+      },
+      "dependsOn": []
+    }
+  ],
+  "outputs": {
+    "webSiteMSIServicePrincipalId": {
+
+      "value": "[concat(resourceId('Microsoft.Web/sites', variables('webSiteName')),'/providers/Microsoft.ManagedIdentity/Identities/default')]",
+      "type": "string"
+    }
+  }
+}
