@@ -22,7 +22,7 @@ steps:
 
 - script: |
     export unittestslayerid=$(docker images --filter "label=unittestlayer=true" -q)
-    docker run --name unittestcontainer -d $(unittestslayerid)
+    docker run --name unittestcontainer -d $unittestslayerid
     docker cp unittestcontainer:/out/testesults ./testresults
     docker stop unittestcontainer
     docker rm unittestcontainer
