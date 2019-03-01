@@ -10,26 +10,43 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  imageName: 'your-container-image-name:$(build.buildId)'
-  azureContainerRegistry: dockerunittestspikeacr
-  azureSubscriptionEndpoint: 'azuredevops'
+  imageName: '$(dockerId).azurecr.io/dockerunittestspike:$(build.buildId)'
+  buildConfiguration: 'Release'
+
 
 steps:
-- task: DockerCompose@0
+- script: |
+    docker build -t $(imageName) -f Dockerfile .
+  displayName: Build docker image
+  continueOnError: false
+
+- script: |
+    export unittestslayerid = $(docker images --filter "label=unittestlayer=true" -q)
+    docker run --name unittestcontainer -d $(unittestslayerid)
+    docker cp unittestcontainer:/out/testesults ./testresults
+    docker stop unittestcontainer
+    docker rm unittestcontainer
   displayName: Run unit tests
-  inputs:
-    action: Run services
-    azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
-    azureContainerRegistry: $(azureContainerRegistry)
-    dockerComposeFile: docker-compose.test.yml
-    projectName: $(Build.Repository.Name)
-    qualifyImageNames: true
-    buildImages: true
-    abortOnContainerExit: true
-    detached: false
+  continueOnError: false
+
 - task: PublishTestResults@2
   displayName: 'Publish Test Results'
   inputs:
     testRunner: VSTest
-    testResultsFiles: '*.trx'
-    searchFolder: '/opt/vsts/work/_temp'
+    testResultsFiles: '**/dockerunittestspiketestresults.xml'
+    searchFolder: '$(System.DefaultWorkingDirectory)/testresults'
+    publishRunAttachments: true
+    failTaskOnFailedTests: true
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'cobertura'
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/testresults/coverage/coverage.cobertura.xml'
+    reportDirectory: '$(System.DefaultWorkingDirectory)/testresults/coverage/reports'
+  displayName: 'Publish coverage reports'
+
+- script: |
+    docker login -u $(dockerId) -p $pswd $(dockerid).azurecr.io
+    docker push $(imageName) 
+  env:
+    pswd: $(dockerPassword)
