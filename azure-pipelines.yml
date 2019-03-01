@@ -21,7 +21,7 @@ steps:
   continueOnError: false
 
 - script: |
-    export unittestslayerid = $(docker images --filter "label=unittestlayer=true" -q)
+    export unittestslayerid=$(docker images --filter "label=unittestlayer=true" -q)
     docker run --name unittestcontainer -d $(unittestslayerid)
     docker cp unittestcontainer:/out/testesults ./testresults
     docker stop unittestcontainer
