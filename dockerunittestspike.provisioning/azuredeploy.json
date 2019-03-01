@@ -41,7 +41,7 @@
     "appServicePlanName": "[concat('dockerunittestspike', parameters('shortregion'), parameters('environment'), 'svcplan')]",
     "webSiteName": "[concat('dockerunittestspike', parameters('shortregion'), parameters('environment'), 'webapp')]",
     "appInsightsName": "[concat('dockerunittestspike', parameters('shortregion'), parameters('environment'), '-appinsights')]",
-    "location": [ "resourceGroup().location" ]
+    "location": "[resourceGroup().location]"
   },
   "resources": [
     {
