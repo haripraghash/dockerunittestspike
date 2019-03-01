@@ -21,7 +21,7 @@ Param (
 
 	# General
 	[Parameter(Mandatory=$true)]
-	[string] $Environment = 'dev',
+	[string] $Environment = 'dev'
 )
 
 $ErrorActionPreference = 'Stop'
@@ -65,7 +65,7 @@ function Main() {
 	}
 	
 	$webApiName = $deployment.outputs.webApiName.Value
-	$appInsightsName = $deployment.outputs.appInsightsName.Value
+	#$appInsightsName = $deployment.outputs.appInsightsName.Value
 	$appInsightsInstrumentationKey = $deployment.outputs.appInsightsInstrumentationKey.Value
 	$apiWebAppUrl = $deployment.outputs.webApiUrl.Value
 

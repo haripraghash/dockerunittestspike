@@ -13,21 +13,20 @@
     "dockerImageName": {
       "type": "string"
     },
-    ///* Artifacts parameters */
-    //"_artifactsLocation": {
-    //  "type": "string"
-    //},
-    //"_artifactsLocationSasToken": {
-    //  "type": "securestring"
-    //},
-    //"_templateFolder": {
-    //  "type": "string",
-    //  "defaultValue": "Templates"
-    //},
-    //"_scriptsFolder": {
-    //  "type": "string",
-    //  "defaultValue": "Scripts"
-    //},
+    "_artifactsLocation": {
+     "type": "string"
+    },
+    "_artifactsLocationSasToken": {
+     "type": "securestring"
+    },
+    "_templateFolder": {
+     "type": "string",
+     "defaultValue": "Templates"
+    },
+    "_scriptsFolder": {
+     "type": "string",
+     "defaultValue": "Scripts"
+    },
     "dockerRegistryUrl": {
       "type": "string"
     },
@@ -125,9 +124,24 @@
   ],
   "outputs": {
     "webSiteMSIServicePrincipalId": {
-
       "value": "[concat(resourceId('Microsoft.Web/sites', variables('webSiteName')),'/providers/Microsoft.ManagedIdentity/Identities/default')]",
       "type": "string"
+    },
+    "webApiName": {
+      "type": "string",
+      "value": "[variables('webSiteName')]"
+    },
+    "webApiUrl": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Web/sites', variables('webSiteName')), '2014-04-01').outputs.httpsUrl.value]"
+    },
+    "appInsightsInstrumentationKey": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Insights/components', 'dockerunittestspike'), '2014-04-01').InstrumentationKey]"
+    },
+    "appId": {
+      "type": "string",
+      "value": "[reference(resourceId('Microsoft.Insights/components', 'dockerunittestspike'), '2014-04-01').AppId]"
     }
   }
 }
