@@ -11,7 +11,25 @@ pool:
 
 variables:
   imageName: 'your-container-image-name:$(build.buildId)'
+  azureContainerRegistry: dockerunittestspikeacr
+  azureSubscriptionEndpoint: 'azuredevops'
 
 steps:
-- script: docker build -f Dockerfile -t $(imageName) .
-  displayName: 'docker build'
+- task: DockerCompose@0
+  displayName: Run unit tests
+  inputs:
+    action: Run services
+    azureSubscriptionEndpoint: $(azureSubscriptionEndpoint)
+    azureContainerRegistry: $(azureContainerRegistry)
+    dockerComposeFile: docker-compose.test.yml
+    projectName: $(Build.Repository.Name)
+    qualifyImageNames: true
+    buildImages: true
+    abortOnContainerExit: true
+    detached: false
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  inputs:
+    testRunner: VSTest
+    testResultsFiles: '*.trx'
+    searchFolder: '/opt/vsts/work/_temp'

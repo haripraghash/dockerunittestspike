@@ -1,11 +1,11 @@
 ﻿version: '3.4'
 
 services: 
- dockerunittestspike.unit.tests:
-  image: dockerunittestspike.unit.tests
+ dokerunittestspike:
+  image: dockerunittestspike:v1
   build:
-    context: ../
-    dockerfile: dockerunittestspike.unit.tests/Dockerfile
-  entrypoint: dotnet test --logger trx --results-directory /out/testresults
+    context: .
+    dockerfile: Dockerfile
+  #entrypoint: dotnet test --logger trx --results-directory /out/testresults
   volumes: 
   - /opt/vsts/work/_temp:/out/testresults
