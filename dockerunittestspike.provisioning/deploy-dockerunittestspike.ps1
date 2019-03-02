@@ -1,19 +1,19 @@
 Param (
 	[Parameter(Mandatory=$true)]
-	[string]$DockerRegistryUrl,
+	[string]$DockerRegistryUrl = "https://dockerunittestspikeacr.azurecr.io",
 
 	[Parameter(Mandatory=$true)]
-	[string]$DockerUserName,
+	[string]$DockerUserName = "dockerunittestspikeacr",
 
 	[Parameter(Mandatory=$true)]
 	[securestring]$DockerPassword,
 
 	[Parameter(Mandatory=$true)]
-	[string]$DockerImageName,
+	[string]$DockerImageName = "dockerunittestspike:211",
 
 	# Resource group
 	[Parameter(Mandatory=$true)]
-	[string] $ResourceGroupLocation,
+	[string] $ResourceGroupLocation = "northeurope",
 
     [string] $ResourceGroupName = 'dockerunittestspike-eun-dev-resgrp',
 
@@ -72,8 +72,8 @@ function Main() {
 	
 	# set application settings for web api
 	$apiAppSettings = @{
-		'ApplicationInsights:InstrumentationKey' = $appInsightsInstrumentationKey;
-		'ASPNETCORE_ENVIRONMENT' = 'Development';
+		'ApplicationInsights__InstrumentationKey' = $appInsightsInstrumentationKey;
+		'ASPNETCORE_ENVIRONMENT' = 'Production';
 	}
 
 	#if ($IsDevelopment)

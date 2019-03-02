@@ -12,11 +12,14 @@ if ((Get-AzureRmContext).Subscription.Name -ne "Visual Studio Enterprise")
 }
 
 $AadAdmin = "..."
-$AadPassword = ConvertTo-SecureString "..." -AsPlainText -Force
+$DockerPassword = ConvertTo-SecureString "..." -AsPlainText -Force
 $ResourceGroupLocation = "northeurope"
 $Environment = "dev"
+$DockerRegistryUrl = "..."
+$DockerUserName = "..."
 
-.\deploy-productapi.ps1 -AadAdmin $AadAdmin `
-   -AadPassword $AadPassword `
+.\deploy-dockerunittestspike.ps1 -DockerPassword $DockerPassword `
    -ResourceGroupLocation $ResourceGroupLocation `
+   -DockerRegistryUrl $DockerRegistryUrl `
+    -DockerUserName $DockerUserName `
    -environment $Environment

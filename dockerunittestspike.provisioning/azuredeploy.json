@@ -82,7 +82,7 @@
       "properties": {
         "name": "[variables('webSiteName')]",
         "siteConfig": {
-          "linuxFxVersion": "[concat('DOCKER|', parameters('dockerImageName'))]",
+          "linuxFxVersion": "[concat('DOCKER|',parameters('dockerUserName'),'.azurecr.io/', parameters('dockerImageName'))]",
           "alwaysOn": true,
           "appSettings": [
             {
@@ -131,7 +131,7 @@
     },
     "webApiUrl": {
       "type": "string",
-      "value": "[reference(resourceId('Microsoft.Web/sites', variables('webSiteName')), '2014-04-01').outputs.httpsUrl.value]"
+      "value": "[concat('https://', variables('webSiteName'),'.azurewebsites.net')]"
     },
     "appInsightsInstrumentationKey": {
       "type": "string",

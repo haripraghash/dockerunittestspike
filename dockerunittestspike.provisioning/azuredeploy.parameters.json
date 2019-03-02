@@ -2,5 +2,20 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "dockerImageName": {
+      "value": "dockerunittestspike:211"
+    },
+    "_templateFolder": {
+      "value": "."
+    },
+    "_scriptsFolder": {
+      "value": "."
+    },
+    "dockerRegistryUrl": {
+      "value": "https://dockerunittestspikeacr.azurecr.io"
+    },
+    "dockerUserName": {
+      "value": "dockerunittestspikeacr"
+    }
   }
 }
