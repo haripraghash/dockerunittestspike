@@ -103,7 +103,39 @@
             }
           ]
         },
-        
+        "resources": [
+          {
+            "apiVersion": "2018-11-01",
+            "name": "logs",
+            "type": "config",
+            "dependsOn": [
+              "[resourceId('Microsoft.Web/Sites', variables('webSiteName'))]"
+            ],
+            "properties": {
+              "applicationLogs": {
+                "fileSystem": {
+                  "level": "Verbose",
+                  "retentionInMb": 100,
+                  "retentionInDays": 90,
+                  "enabled": true
+                }
+              },
+              "httpLogs": {
+                "fileSystem": {
+                  "retentionInMb": 100,
+                  "retentionInDays": 90,
+                  "enabled": true
+                }
+              },
+              "failedRequestsTracing": {
+                "enabled": true
+              },
+              "detailedErrorMessages": {
+                "enabled": true
+              }
+            }
+          }
+        ],
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
       }
     },
