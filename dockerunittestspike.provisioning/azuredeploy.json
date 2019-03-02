@@ -55,7 +55,7 @@
       },
       "kind": "linux",
       "name": "[variables('appServicePlanName')]",
-      
+      "apiVersion": "2018-11-01",
       "location": "[variables('location')]",
       "scale": null,
       "properties": {
@@ -72,6 +72,7 @@
     },
     {
       "type": "Microsoft.Web/sites",
+      "apiVersion": "2018-11-01",
       "name": "[variables('webSiteName')]",
       "kind": "app,linux,container",
       "location": "[variables('location')]",
@@ -102,9 +103,7 @@
             }
           ]
         },
-        "identity": {
-          "type": "SystemAssigned"
-        },
+        
         "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
       }
     },
